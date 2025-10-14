@@ -1,0 +1,309 @@
+.sec1 {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2% 0;
+}
+.sec1_container {
+  width: 90%;
+  padding: 2%;
+  height: fit-content;
+  background: hsl(0, 0%, 100%);
+  border-radius: 20px;
+  box-shadow: 0 0 10px #888;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 1em;
+}
+
+.sec1_head {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  height: fit-content;
+}
+.sec1_head h2 {
+  font-weight: 500;
+}
+.sec1_content,
+.items {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1em;
+  width: 100%;
+}
+.sec1_content form,
+.items form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  row-gap: 0.5em;
+  height: 100%;
+}
+.special_form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  row-gap: 0.5em;
+  height: 100%;
+}
+.items form .form_des,
+.items form .item_form_contents {
+  width: 100%;
+}
+.items form .item_form_contents {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 2%;
+}
+.items form .item_form_contents .inputs input {
+  padding: 3% 0;
+  padding-left: 7%;
+}
+.items form .item_form_contents .inputs input::placeholder {
+  color: #444;
+}
+.inputs {
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.5em;
+  width: 100%;
+}
+.inputs label,
+.items label {
+  font-size: 15px;
+  color: #111;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
+.inputs input,
+.inputs textarea,
+.items input {
+  width: 100%;
+  padding: 1% 1%;
+  outline: none;
+  border: 1px solid #999;
+  border-radius: 8px;
+  font-size: 15px;
+  resize: none;
+}
+.business_h2 {
+  display: flex;
+  align-items: center;
+  column-gap: 2px;
+}
+.itms_cont {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  row-gap: 0.7em;
+}
+.items {
+  padding: 2%;
+  background: hsl(0, 0%, 97%);
+  border: 1px solid hsl(0, 0%, 80%);
+  border-radius: 20px;
+  width: 100%;
+}
+.addItem_btn {
+  color: #444;
+  font-size: 18px;
+  width: 100%;
+  background: hsla(60, 100%, 50%, 0);
+  border: 3px dashed #888;
+  padding: 1% 0;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.4s all;
+}
+.addItem_btn:hover {
+  background: hsl(0, 0%, 97%);
+  border: 3px dashed hsl(0, 0%, 80%);
+}
+.tax_notes {
+  width: 100%;
+  margin-top: 10px;
+  height: fit-content;
+}
+.tax_notes form {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1.5em;
+}
+.tax_notes .inputs input,
+.tax_notes .inputs textarea {
+  background: #ff00;
+}
+.tax_notes .inputs textarea {
+  height: 7em;
+}
+.download_btn {
+  color: #444;
+  font-size: 18px;
+  width: 100%;
+  background: blue;
+  padding: 1% 0;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.4s all;
+  border: none;
+  outline: none;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 4px;
+}
+.download_btn:hover {
+  background: hsl(240, 100%, 60%);
+}
+.delete_btn {
+  border: none;
+  outline: none;
+  color: #f00;
+  background: unset;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 500;
+  font-size: 16px;
+  width: fit-content;
+  cursor: pointer;
+}
+.items form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.invoice_reciept {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2% 0;
+}
+.invoice_reciept_container {
+  width: 90%;
+  padding: 3%;
+  height: fit-content;
+  background: hsl(0, 0%, 100%);
+  border-radius: 20px;
+  box-shadow: 0 0 10px #888;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 1em;
+}
+.head_container {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  row-gap: 1em;
+  justify-content: center;
+  align-items: center;
+}
+.first_heading {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  row-gap: 1em;
+  justify-content: center;
+  align-items: center;
+}
+.first_heading h2 {
+  font-size: 30px;
+  text-transform: uppercase;
+}
+.first_heading hr {
+  height: 4px;
+  border: 2px solid blue;
+  width: 100%;
+}
+.second_heading {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.second_heading span p {
+  color: #444;
+  font-weight: 500;
+}
+.second_heading span h2 {
+  color: #111;
+  font-weight: 500;
+  font-size: 20px;
+}
+.invoice_reciept_body {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  row-gap: 2em;
+}
+.invoice_info {
+  width: 100%;
+  height: fit-content;
+  background: hsl(0, 0%, 96%);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2%;
+  border-radius: 20px;
+}
+.invoice_info span p {
+  color: #333;
+  font-weight: 500;
+  display: flex;
+  column-gap: 3px;
+  align-items: center;
+}
+.invoice_info span h2 {
+  color: #111;
+  font-weight: 500;
+  font-size: 17px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table th,
+table td {
+  padding: 10px;
+}
+
+table tr:first-child th {
+  border-bottom: 2px solid #999;
+}
+table tr:first-child th:first-child {
+  text-align: left;
+}
+table tr:first-child th:last-child {
+  text-align: right;
+}
+table tr:not(:nth-child(1)) td {
+  text-align: center;
+}
+table tr:not(:nth-child(1)) td:first-child {
+  text-align: left;
+}
+table tr:not(:nth-child(1)) td:last-child {
+  text-align: right;
+}
