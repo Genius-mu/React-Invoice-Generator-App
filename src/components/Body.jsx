@@ -1,6 +1,7 @@
 import "./Body.css";
-import { Field, Form, Formik } from "formik";
+import { Field, Form, Formik, useFormik } from "formik";
 import { useEffect, useState } from "react";
+import * as yup from "yup";
 import {
   Asterisk,
   CloudDrizzle,
@@ -17,25 +18,35 @@ const Body = () => {
   // DOWNLOADING PDFs
   const invoiceRef = useRef();
 
-  const downloadPDF = async () => {
-    const element = invoiceRef.current; // The section you want to download
-    const canvas = await html2canvas(element); // Take screenshot
-    const imgData = canvas.toDataURL("image/png"); // Convert screenshot to image
+  // const downloadPDF = async () => {
+  //   const element = invoiceRef.current; // The section you want to download
+  //   const canvas = await html2canvas(element); // Take screenshot
+  //   const imgData = canvas.toDataURL("image/png"); // Convert screenshot to image
 
-    const pdf = new jsPDF("p", "mm", "a4"); // Create A4 PDF
-    const pageWidth = pdf.internal.pageSize.getWidth();
-    const pageHeight = pdf.internal.pageSize.getHeight();
+  //   const pdf = new jsPDF("p", "mm", "a4"); // Create A4 PDF
+  //   const pageWidth = pdf.internal.pageSize.getWidth();
+  //   const pageHeight = pdf.internal.pageSize.getHeight();
 
-    // Calculate image dimensions
-    const imgWidth = pageWidth;
-    const imgHeight = (canvas.height * imgWidth) / canvas.width;
+  //   // Calculate image dimensions
+  //   const imgWidth = pageWidth;
+  //   const imgHeight = (canvas.height * imgWidth) / canvas.width;
 
-    pdf.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
-    pdf.save("invoice.pdf"); // Downloads the file
-  };
+  //   pdf.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
+  //   pdf.save("invoice.pdf"); // Downloads the file
+  // };
 
-  let businessName = prompt("What's your business name ?");
-  let clientName = prompt("What's your client name ?");
+  const [businessName, setBusinessName] = useState("");
+  const [clientName, setClientName] = useState("");
+
+  // Run prompts only once when page first loads
+  useEffect(() => {
+    const biz = prompt("What's your business name ?");
+    const client = prompt("What's your client name ?");
+    setBusinessName(biz || "Your Business");
+    setClientName(client || "Client Name");
+  }, []); // <-- empty dependency array = runs only once
+
+  // ... your other code
 
   const [items, setItems] = useState([
     { description: "", qty: 0, rate: 0, amount: 0 },
@@ -71,10 +82,109 @@ const Body = () => {
       )
     );
   };
-
+  // const [Biz, setBiz] = useState("**");
+  // const [Client, setClient] = useState("**")
   const [InvoiceNum, setinvoiceNum] = useState("INV-001");
   const [InvoiceDate, setInvoiceDate] = useState("2024-05-02");
   const [InvoiceDueDate, setInvoiceDueDate] = useState("2024-05-03");
+  // const formik = useFormik({
+  //   initialValues: {
+  //     invoiceNum: "",
+  //     invoiceDate: "",
+  //     dueDate: "",
+  //     BusinessName: "",
+  //     emailVal: "",
+  //     PhoneVal: "",
+  //     ClientName: "",
+  //     ClientPhone: "",
+  //     ClientAddress: "",
+  //     itemDescription: "",
+  //     itemQty: "",
+  //     itemRate: "",
+  //     itemAmount: "",
+  //     TaxRate: "",
+  //     ClientEmailVal: "",
+  //   },
+  //   validationSchema: yup.object({
+  //     invoiceNum: yup.string().required("*This field is required"),
+  //     invoiceDate: yup.string().required("*This field is required"),
+  //     dueDate: yup.string().required("*This field is required"),
+  //     BusinessName: yup.string().required("*This field is required"),
+  //     PhoneVal: yup.string().required("*This field is required"),
+  //     clientName: yup.string().required("*This field is required"),
+  //     ClientPhone: yup.string().required("*This field is required"),
+  //     ClientAddress: yup.string().required("*This field is required"),
+  //     itemDescription: yup.string().required("*This field is required"),
+  //     itemQty: yup.string().required("*This field is required"),
+  //     itemRate: yup.string().required("*This field is required"),
+  //     itemAmount: yup.string().required("*This field is required"),
+  //     TaxRate: yup.string().required("*This field is required"),
+  //     emailVal: yup
+  //       .string()
+  //       .required("*This Field is required!")
+  //       .email("*Email must be Valid"),
+  //   }),
+  //   onSubmit: async (values) => {
+  //     // ✅ If we get here, validation passed — so we can download safely
+  //     const element = invoiceRef.current;
+  //     const canvas = await html2canvas(element);
+  //     const imgData = canvas.toDataURL("image/png");
+  //     const pdf = new jsPDF("p", "mm", "a4");
+  //     const pageWidth = pdf.internal.pageSize.getWidth();
+  //     const imgHeight = (canvas.height * pageWidth) / canvas.width;
+  //     pdf.addImage(imgData, "PNG", 0, 0, pageWidth, imgHeight);
+  //     pdf.save("invoice.pdf");
+  //   },
+  // });
+
+  const formik = useFormik({
+    initialValues: {
+      invoiceNum: "",
+      invoiceDate: "",
+      dueDate: "",
+      BusinessName: "",
+      emailVal: "",
+      PhoneVal: "",
+      ClientName: "",
+      ClientPhone: "",
+      ClientAddress: "",
+      itemDescription: "",
+      itemQty: "",
+      itemRate: "",
+      itemAmount: "",
+      TaxRate: "",
+      ClientEmailVal: "",
+    },
+    validationSchema: yup.object({
+      invoiceNum: yup.string().required("*This field is required"),
+      invoiceDate: yup.string().required("*This field is required"),
+      dueDate: yup.string().required("*This field is required"),
+      BusinessName: yup.string().required("*This field is required"),
+      PhoneVal: yup.string().required("*This field is required"),
+      ClientName: yup.string().required("*This field is required"),
+      ClientPhone: yup.string().required("*This field is required"),
+      ClientAddress: yup.string().required("*This field is required"),
+      itemDescription: yup.string().required("*This field is required"),
+      itemQty: yup.string().required("*This field is required"),
+      itemRate: yup.string().required("*This field is required"),
+      TaxRate: yup.string().required("*This field is required"),
+      emailVal: yup
+        .string()
+        .email("*Email must be valid")
+        .required("*This field is required"),
+    }),
+    onSubmit: async (values) => {
+      // ✅ If we get here, validation passed — so we can download safely
+      const element = invoiceRef.current;
+      const canvas = await html2canvas(element);
+      const imgData = canvas.toDataURL("image/png");
+      const pdf = new jsPDF("p", "mm", "a4");
+      const pageWidth = pdf.internal.pageSize.getWidth();
+      const imgHeight = (canvas.height * pageWidth) / canvas.width;
+      pdf.addImage(imgData, "PNG", 0, 0, pageWidth, imgHeight);
+      pdf.save("invoice.pdf");
+    },
+  });
 
   return (
     <>
@@ -96,10 +206,15 @@ const Body = () => {
                     type="text"
                     name="invoiceNum"
                     placeholder="INV-001"
-                    onChange={(a) => {
-                      setinvoiceNum(a.target.value);
-                    }}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
                   />
+
+                  {formik.touched.invoiceNum && (
+                    <div style={{ color: "#f00", fontSize: "13px" }}>
+                      {formik.errors.invoiceNum}
+                    </div>
+                  )}
                 </div>
                 <div className="inputs">
                   <label htmlFor="">
@@ -110,9 +225,18 @@ const Body = () => {
                     type="date"
                     name="invoiceDate"
                     onChange={(z) => {
+                      {
+                        formik.handleChange(z);
+                      }
                       setInvoiceDate(z.target.value);
                     }}
+                    onBlur={formik.handleBlur}
                   />
+                  {formik.touched.invoiceDate && (
+                    <div style={{ color: "#f00", fontSize: "13px" }}>
+                      {formik.errors.invoiceDate}
+                    </div>
+                  )}
                 </div>
                 <div className="inputs">
                   <label htmlFor="">
@@ -122,8 +246,19 @@ const Body = () => {
                   <Field
                     type="date"
                     name="dueDate"
-                    onChange={(d) => setInvoiceDueDate(d.target.value)}
+                    onChange={(d) => {
+                      {
+                        formik.handleChange(d);
+                      }
+                      setInvoiceDueDate(d.target.value);
+                    }}
+                    onBlur={formik.handleBlur}
                   />
+                  {formik.touched.dueDate && (
+                    <div style={{ color: "#f00", fontSize: "13px" }}>
+                      {formik.errors.dueDate}
+                    </div>
+                  )}
                 </div>
               </Form>
             </Formik>
@@ -137,14 +272,26 @@ const Body = () => {
               <Form>
                 <div className="inputs">
                   <label htmlFor="">
-                    {businessName}
+                    {"Business Name"}
                     <Asterisk size={12} color="#f00" strokeWidth={2} />
                   </label>
                   <Field
                     type="text"
                     name="BusinessName"
                     placeholder="Your Business Name"
+                    onChange={(b) => {
+                      {
+                        formik.handleChange(b);
+                      }
+                      setBiz(b.target.value);
+                    }}
+                    onBlur={formik.handleBlur}
                   />
+                  {formik.touched.BusinessName && (
+                    <div style={{ color: "#f00", fontSize: "13px" }}>
+                      {formik.errors.BusinessName}
+                    </div>
+                  )}
                 </div>
                 <div className="inputs">
                   <label htmlFor="">
@@ -155,7 +302,14 @@ const Body = () => {
                     type="email"
                     name="emailVal"
                     placeholder="business@example.com"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
                   />
+                  {formik.touched.emailVal && (
+                    <div style={{ color: "#f00", fontSize: "13px" }}>
+                      {formik.errors.emailVal}
+                    </div>
+                  )}
                 </div>
                 <div className="inputs">
                   <label htmlFor="">
@@ -164,9 +318,16 @@ const Body = () => {
                   </label>
                   <Field
                     type="number"
-                    name="Phone"
+                    name="PhoneVal"
                     placeholder="+1 (555) 123-4567"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
                   />
+                  {formik.touched.PhoneVal && (
+                    <div style={{ color: "#f00", fontSize: "13px" }}>
+                      {formik.errors.PhoneVal}
+                    </div>
+                  )}
                 </div>
                 <div className="inputs">
                   <label htmlFor="">
@@ -190,14 +351,26 @@ const Body = () => {
               <Form>
                 <div className="inputs">
                   <label htmlFor="">
-                    {clientName}
+                    {"Client Name"}
                     <Asterisk size={12} color="#f00" strokeWidth={2} />
                   </label>
                   <Field
                     type="text"
                     name="ClientName"
-                    placeholder="Your Business Name"
+                    placeholder="Your Client Name"
+                    onChange={(c) => {
+                      {
+                        formik.handleChange(c);
+                      }
+                      setClient(c.target.value);
+                    }}
+                    onBlur={formik.handleBlur}
                   />
+                  {formik.touched.ClientName && (
+                    <div style={{ color: "#f00", fontSize: "13px" }}>
+                      {formik.errors.ClientName}
+                    </div>
+                  )}
                 </div>
                 <div className="inputs">
                   <label htmlFor="">
@@ -208,7 +381,14 @@ const Body = () => {
                     type="email"
                     name="ClientEmailVal"
                     placeholder="business@example.com"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
                   />
+                  {formik.touched.ClientEmailVal && (
+                    <div style={{ color: "#f00", fontSize: "13px" }}>
+                      {formik.errors.ClientEmailVal}
+                    </div>
+                  )}
                 </div>
                 <div className="inputs">
                   <label htmlFor="">
@@ -219,7 +399,14 @@ const Body = () => {
                     type="number"
                     name="ClientPhone"
                     placeholder="+1 (555) 123-4567"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
                   />
+                  {formik.touched.ClientPhone && (
+                    <div style={{ color: "#f00", fontSize: "13px" }}>
+                      {formik.errors.ClientPhone}
+                    </div>
+                  )}
                 </div>
                 <div className="inputs">
                   <label htmlFor="">
@@ -229,7 +416,14 @@ const Body = () => {
                   <textarea
                     name="ClientAddress"
                     placeholder="123 Business St, City, State, ZIP"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
                   ></textarea>
+                  {formik.touched.ClientAddress && (
+                    <div style={{ color: "#f00", fontSize: "13px" }}>
+                      {formik.errors.ClientAddress}
+                    </div>
+                  )}
                 </div>
               </Form>
             </Formik>
@@ -258,10 +452,19 @@ const Body = () => {
                           name="itemDescription"
                           placeholder="Service or product description"
                           value={item.description}
-                          onChange={(e) =>
-                            handleChange(index, "description", e.target.value)
-                          }
+                          onChange={(e) => {
+                            {
+                              formik.handleChange(e);
+                            }
+                            handleChange(index, "description", e.target.value);
+                          }}
+                          onBlur={formik.handleBlur}
                         />
+                        {formik.touched.itemDescription && (
+                          <div style={{ color: "#f00", fontSize: "13px" }}>
+                            {formik.errors.itemDescription}
+                          </div>
+                        )}
                       </div>
                     </div>
 
@@ -276,10 +479,19 @@ const Body = () => {
                           name="itemQty"
                           placeholder="0"
                           value={item.qty}
-                          onChange={(e) =>
-                            handleChange(index, "qty", e.target.value)
-                          }
+                          onChange={(e) => {
+                            {
+                              formik.handleChange(e);
+                            }
+                            handleChange(index, "qty", e.target.value);
+                          }}
+                          onBlur={formik.handleBlur}
                         />
+                        {formik.touched.itemQty && (
+                          <div style={{ color: "#f00", fontSize: "13px" }}>
+                            {formik.errors.itemQty}
+                          </div>
+                        )}
                       </div>
                       <div className="inputs">
                         <label>
@@ -291,10 +503,19 @@ const Body = () => {
                           name="itemRate"
                           placeholder="0"
                           value={item.rate}
-                          onChange={(e) =>
-                            handleChange(index, "rate", e.target.value)
-                          }
+                          onChange={(e) => {
+                            {
+                              formik.handleChange(e);
+                            }
+                            handleChange(index, "rate", e.target.value);
+                          }}
+                          onBlur={formik.handleBlur}
                         />
+                        {formik.touched.itemRate && (
+                          <div style={{ color: "#f00", fontSize: "13px" }}>
+                            {formik.errors.itemRate}
+                          </div>
+                        )}
                       </div>
                       <div className="inputs">
                         <label>
@@ -348,13 +569,26 @@ const Body = () => {
                     placeholder="Additional notes or payment terms..."
                   ></textarea>
                 </div>
+                <button
+                  className="download_btn"
+                  type="submit"
+                  onClick={formik.handleSubmit} // ✅ runs validation, then downloads if valid
+                >
+                  <Download size={20} strokeWidth={3} color="#fff" />
+                  Download Invoice (PDF)
+                </button>
+                {/* <button
+                  className="download_btn"
+                  onClick={downloadPDF}
+                  onSubmit={formik.handleSubmit}
+                  type="submit"
+                >
+                  <Download size={20} strokeWidth={3} color="#fff" />
+                  Download Invoice (PDF)
+                </button> */}
               </Form>
             </Formik>
           </div>
-          <button className="download_btn" onClick={downloadPDF}>
-            <Download size={20} strokeWidth={3} color="#fff" />
-            Download Invoice (PDF)
-          </button>
         </div>
       </section>
       <section className="invoice_reciept" ref={invoiceRef}>
@@ -367,11 +601,11 @@ const Body = () => {
             <div className="second_heading">
               <span>
                 <p>From:</p>
-                <h2>Your Business</h2>
+                <h2>{businessName}</h2>
               </span>
               <span>
                 <p>To:</p>
-                <h2>Client Name</h2>
+                <h2>{clientName}</h2>
               </span>
             </div>
           </div>

@@ -307,3 +307,102 @@ table tr:not(:nth-child(1)) td:first-child {
 table tr:not(:nth-child(1)) td:last-child {
   text-align: right;
 }
+
+@media (max-width: 720px) {
+  .inputs textarea {
+    padding: 3%;
+  }
+  .inputs input {
+    padding: 2% 1%;
+    padding-left: 3%;
+  }
+  .sec1_container {
+    padding: 4%;
+  }
+  .download_btn {
+    padding: 3% 0;
+  }
+}
+@media (max-width: 400px) {
+  .inputs textarea {
+    font-size: 13px;
+  }
+  .inputs input {
+    font-size: 13px;
+  }
+  .inputs label {
+    font-weight: 400;
+    font-size: 14px;
+  }
+  .items {
+    padding: 5%;
+  }
+  .item_form_contents {
+    display: flex;
+    flex-direction: column;
+  }
+  .invoice_info span p,
+  .second_heading span p {
+    font-size: 13px;
+  }
+  .second_heading span h2,
+  .invoice_info span h2 {
+    font-size: 13px;
+    font-weight: 700;
+  }
+  table th {
+    font-size: 15px;
+    font-weight: 500;
+  }
+  .invoice_info {
+    border-radius: 10px;
+    padding: 5%;
+  }
+  .download_btn {
+    font-size: 15px;
+  }
+  .first_heading h2 {
+    font-size: 19px;
+  }
+}
+
+@media (max-width: 370px) {
+  .inputs label {
+    font-size: 12px;
+  }
+  .inputs input {
+    padding: 4% 1%;
+    padding-left: 6%;
+    font-size: 12px;
+  }
+  .download_btn {
+    padding: 5% 0;
+  }
+  h2 {
+    font-size: 15px;
+  }
+  .invoice_info {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1em;
+  }
+  .invoice_info span {
+    width: 100%;
+  }
+  .invoice_info span:not(:last-child) {
+    border-bottom: 1px solid #555;
+    padding-bottom: 1em;
+  }
+  .invoice_info span p,
+  .second_heading span p {
+    font-size: 13px;
+  }
+  .second_heading span h2,
+  .invoice_info span h2 {
+    font-size: 14px;
+    font-weight: 700;
+  }
+  table th, table td {
+    font-size: 9px;
+  }
+}
